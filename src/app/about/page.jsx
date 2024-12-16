@@ -79,8 +79,10 @@ const TAB_DATA = [
     id: "certifications",
     content: (
       <ul className="list-disc pl-2">
-        <li>SSII Shining stars</li>
-        <li>Professional Web Developer and Designer</li>
+        <li>Certificate of Participation in Web Design for Girls- Shining Stars Global Impact Foundation</li>
+        <li>Certificate of Participation in Leadership Training Program - Build-in-a-Box</li>
+        <li>Certificate of Excellence - Nigerian Asociation of Computing Students, University of Ibadan.</li>
+        <li>Certificate of Achievment in Web Development Course - Entrepreneurship Development Initiative Programme 2022</li>
       </ul>
     ),
   },

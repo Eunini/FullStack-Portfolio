@@ -1,9 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import GithubIcon from "../../../public/github-icon.svg";
-import LinkedinIcon from "../../../public/linkedin-icon.svg";
 import Link from "next/link";
-import Image from "next/image";
 import {SiFacebook, SiWhatsapp, SiLinkedin, SiGithub} from 'react-icons/si';
 const Contact = () => {
   const [emailSubmitted, setEmailSubmitted] = useState(false);

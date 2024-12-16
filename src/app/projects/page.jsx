@@ -39,7 +39,7 @@ const projectsData = [
     image: "/images/projects/11.png",
     tag: ["All", "Highlights"],
     gitUrl: "https://github.com/Eunini/CreativeCue",
-    previewUrl: "/",
+    previewUrl: "https://creative-cue-d2ry.vercel.app/",
   },
   {
     id: 5,
