@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 
 const AnimatedNumbers = dynamic(
   () => {
@@ -12,25 +13,37 @@ const AnimatedNumbers = dynamic(
 const achievementsList = [
   {
     metric: "Projects",
-    value: "100",
+    value: 50,
     postfix: "+",
   },
   {
-    prefix: "~",
     metric: "Users",
-    value: "100,000",
+    value: 100,
+    postfix: "+",
   },
   {
     metric: "Awards",
-    value: "7",
+    value: 5,
   },
   {
     metric: "Years",
-    value: "5",
+    value: 3,
+    postfix: "+",
   },
 ];
 
 const AchievementsSection = () => {
+  const [animatedValues, setAnimatedValues] = useState(
+    achievementsList.map(() => 0)
+  );
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setAnimatedValues(achievementsList.map((item) => item.value));
+    }, 500); // Adjust the delay as needed
+    return () => clearTimeout(timeout);
+  }, []);
+
   return (
     <div className="py-8 px-4 xl:gap-16 sm:py-16 xl:px-16">
       <div className="sm:border-[#33353F] sm:border rounded-md py-8 px-16 flex flex-col sm:flex-row items-center justify-between">
@@ -44,14 +57,14 @@ const AchievementsSection = () => {
                 {achievement.prefix}
                 <AnimatedNumbers
                   includeComma
-                  animateToNumber={parseInt(achievement.value)}
+                  animateToNumber={animatedValues[index]}
                   locale="en-US"
                   className="text-white text-4xl font-bold"
-                  configs={(_, index) => {
+                  configs={(_, i) => {
                     return {
                       mass: 1,
                       friction: 100,
-                      tensions: 140 * (index + 1),
+                      tensions: 140 * (i + 1),
                     };
                   }}
                 />

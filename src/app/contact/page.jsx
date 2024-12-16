@@ -4,8 +4,8 @@ import GithubIcon from "../../../public/github-icon.svg";
 import LinkedinIcon from "../../../public/linkedin-icon.svg";
 import Link from "next/link";
 import Image from "next/image";
-
-const EmailSection = () => {
+import {SiFacebook, SiWhatsapp, SiLinkedin, SiGithub} from 'react-icons/si';
+const Contact = () => {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -53,14 +53,20 @@ const EmailSection = () => {
           {" "}
           I&apos;m currently looking for new opportunities, my inbox is always
           open. Whether you have a question or just want to say hi, I&apos;ll
-          try my best to get back to you!
+          get back to you!
         </p>
         <div className="socials flex flex-row gap-2">
-          <Link href="github.com">
-            <Image src={GithubIcon} alt="Github Icon" />
+          <Link href="https://github.com/Eunini" target="_blank">
+            <SiGithub size={50} color="white" className="hover:text-purple-500" />
           </Link>
-          <Link href="linkedin.com">
-            <Image src={LinkedinIcon} alt="Linkedin Icon" />
+          <Link href="https://www.linkedin.com/in/inioluwa-atanda-72a782270/" target="_blank">
+            <SiLinkedin size={50} color="white" className="hover:text-purple-500"/>
+          </Link>
+          <Link href="https://www.instagram.com/inioluwa-atanda-72a782270/">
+            <SiFacebook size={50} color="white" className="hover:text-purple-500"/>
+          </Link>
+          <Link href="https://wa.me/message/TFFG2ETW5L3CH1" target="_blank">
+            <SiWhatsapp size={50} color="white" className="hover:text-purple-500"/>
           </Link>
         </div>
       </div>
@@ -84,7 +90,7 @@ const EmailSection = () => {
                 id="email"
                 required
                 className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
-                placeholder="jacob@google.com"
+                placeholder="joan@google.com"
               />
             </div>
             <div className="mb-6">
@@ -100,7 +106,7 @@ const EmailSection = () => {
                 id="subject"
                 required
                 className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
-                placeholder="Just saying hi"
+                placeholder="I love your designs!"
               />
             </div>
             <div className="mb-6">
@@ -130,4 +136,4 @@ const EmailSection = () => {
   );
 };
 
-export default EmailSection;
+export default Contact;
