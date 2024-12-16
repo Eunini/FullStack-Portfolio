@@ -57,16 +57,16 @@ const Contact = () => {
         </p>
         <div className="socials flex flex-row gap-2">
           <Link href="https://github.com/Eunini" target="_blank">
-            <SiGithub size={50} color="white" className="hover:text-purple-500" />
+            <SiGithub size={25} color="white" className="hover:text-purple-500" />
           </Link>
           <Link href="https://www.linkedin.com/in/inioluwa-atanda-72a782270/" target="_blank">
-            <SiLinkedin size={50} color="white" className="hover:text-purple-500"/>
+            <SiLinkedin size={25} color="white" className="hover:text-purple-500"/>
           </Link>
           <Link href="https://www.instagram.com/inioluwa-atanda-72a782270/">
-            <SiFacebook size={50} color="white" className="hover:text-purple-500"/>
+            <SiFacebook size={25} color="white" className="hover:text-purple-500"/>
           </Link>
           <Link href="https://wa.me/message/TFFG2ETW5L3CH1" target="_blank">
-            <SiWhatsapp size={50} color="white" className="hover:text-purple-500"/>
+            <SiWhatsapp size={25} color="white" className="hover:text-purple-500"/>
           </Link>
         </div>
       </div>
