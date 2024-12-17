@@ -113,28 +113,29 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu Overlay */}
-      {navbarOpen && (
-        <div className="md:hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-80 z-20 flex flex-col items-center justify-center space-y-8">
-          {/* Close Button */}
-          <button
-            onClick={toggleNavbar}
-            className="absolute top-6 right-6 z-30 text-slate-200"
-          >
-            <XMarkIcon
-              className={`h-7 w-7 transform transition-all duration-300 ${
-                navbarOpen ? "rotate-180" : "rotate-0"
-              }`} 
-            />
-          </button>
-          <ul className="text-center space-y-8 text-white text-lg z-10">
-            {navLinks.map((link, index) => (
-              <li key={index}>
-                <NavLink href={link.path} title={link.title} />
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+{navbarOpen && (
+  <div className="md:hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-90 z-50 flex flex-col items-center justify-center space-y-8">
+    {/* Close Button */}
+    <button
+      onClick={toggleNavbar}
+      className="absolute top-6 right-6 z-50 text-slate-200"
+    >
+      <XMarkIcon
+        className={`h-7 w-7 transform transition-all duration-300 ${
+          navbarOpen ? "rotate-180" : "rotate-0"
+        }`}
+      />
+    </button>
+    <ul className="text-center space-y-8 text-white text-lg z-50">
+      {navLinks.map((link, index) => (
+        <li key={index}>
+          <NavLink href={link.path} title={link.title} />
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
+
     </nav>
   );
 };
