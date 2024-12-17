@@ -50,17 +50,8 @@ const projectsData = [
     gitUrl: "https://github.com/Eunini/EasyBanking",
     previewUrl: "https://easy-banking-zqc6.onrender.com",
   },
-  // {
-  //   id: 6,
-  //   title: "Full-stack Roadmap",
-  //   description: "Project 5 description",
-  //   image: "/images/projects/6.png",
-  //   tag: ["All", "Highlights"],
-  //   gitUrl: "/",
-  //   previewUrl: "/",
-  // },
-];
-
+ ];
+ 
 const ProjectsSection = () => {
   const [tag, setTag] = useState("All");
   const ref = useRef(null);

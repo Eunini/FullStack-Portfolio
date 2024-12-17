@@ -1,16 +1,15 @@
 import Head from "next/head";
 import HeroSection from "./components/HeroSection";
 import Navbar from "./components/Navbar";
-import AboutSection from "./about/page";
-import ProjectsSection from "./projects/page";
-import Contact from "./contact/page";
+import AboutSection from "./components/About";
+import ProjectsSection from "./components/Projects";
+import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
 export default function Home() {
   return (
     <>
       <Head>
-        {/* General Meta Tags */}
         <title>Inioluwa Atanda | Portfolio</title>
         <meta
           name="description"
@@ -30,7 +29,6 @@ export default function Home() {
         <meta property="og:url" content="https://www.yourwebsite.com" />
         <meta property="og:type" content="website" />
 
-        {/* Twitter Card Tags (for Twitter Preview) */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Inioluwa Atanda | Portfolio" />
         <meta
@@ -39,7 +37,6 @@ export default function Home() {
         />
         <meta name="twitter:image" content="/logo.png" />
 
-        {/* Favicon (Logo in Browser Tab) */}
         <link rel="icon" href="/logo.png" />
       </Head>
       <main className="flex min-h-screen flex-col bg-[#121212]">
