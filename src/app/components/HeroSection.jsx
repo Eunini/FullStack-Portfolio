@@ -60,7 +60,7 @@ const HeroSection = () => {
                 <a
                   href="/CV.pdf" 
                   download="Inioluwa_Atanda_CV.pdf" 
-                  className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-200 ease-in-out"
+                  className="text-white font-semibold"
                 >
                   Download CV
                 </a>
