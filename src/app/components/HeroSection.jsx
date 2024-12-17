@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { Suspense } from "react";
 import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
@@ -20,27 +20,29 @@ const HeroSection = () => {
               Hello, I&apos;m{" "} 
             </span>
             <br></br>
-            <TypeAnimation
-              sequence={[
-                "Inioluwa",
-                1000,
-                "A Web Developer",
-                1000,
-                "A Web Designer",
-                1000,
-                "A Content Writer",
-                1000,
-                "A WordPress Dev",
-                1000,
-                "A Freelancer",
-                1000,
-                "A DevOps Eng.",
-                1000,
-              ]}
-              wrapper="span"
-              speed={50}
-              repeat={Infinity}
-            />
+            <Suspense fallback={<div>Loading animation...</div>}>
+              <TypeAnimation
+                sequence={[
+                  "Inioluwa",
+                  1000,
+                  "A Web Developer",
+                  1000,
+                  "A Web Designer",
+                  1000,
+                  "A Content Writer",
+                  1000,
+                  "A WordPress Dev",
+                  1000,
+                  "A Freelancer",
+                  1000,
+                  "A DevOps Eng.",
+                  1000,
+                ]}
+                wrapper="span"
+                speed={50}
+                repeat={Infinity}
+              />
+            </Suspense>
           </h1>
           <p className="text-[#ADB7BE] text-base sm:text-lg mb-6 lg:text-xl">
             My passion lies in creating innovative and user-centric digital solutions. I am continuously exploring new technologies to enhance my skills and build impactful applications that solve real-world problems.
@@ -53,17 +55,12 @@ const HeroSection = () => {
               Hire Me
             </Link>
             <Link
-              href="/"
+              href="/CV.pdf"
+              download="Inioluwa_Atanda_CV.pdf"
               className="px-1 inline-block py-1 w-full sm:w-fit rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-800 text-white mt-3"
             >
               <div className="flex items-center justify-center block bg-[#121212] hover:bg-slate-800 rounded-full px-5 py-2">
-                <a
-                  href="/CV.pdf" 
-                  download="Inioluwa_Atanda_CV.pdf" 
-                  className="text-white font-semibold"
-                >
-                  Download CV
-                </a>
+                Download CV
               </div>
             </Link>
           </div>

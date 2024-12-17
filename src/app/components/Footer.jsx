@@ -6,7 +6,6 @@ const Footer = () => {
   return (
     <footer className="footer border z-10 border-t-[#33353F] border-l-transparent border-r-transparent text-white">
       <div className="container p-12 flex flex-col md:flex-row items-center justify-between">
-        {/* Logo Section */}
         <Link
           href={"/"}
           className="text-2xl md:text-5xl flex justify-center items-center text-white font-semibold mb-6 md:mb-0"

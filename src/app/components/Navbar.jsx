@@ -1,22 +1,21 @@
 "use client";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import NavLink from "./NavLink"; // Assuming this is a custom link component
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 
 const navLinks = [
   {
     title: "About",
-    path: "/about",
+    path: "#about",
   },
   {
     title: "Projects",
-    path: "/projects",
+    path: "#projects",
   },
   {
     title: "Contact",
-    path: "/contact",
+    path: "#contact",
   },
 ];
 
@@ -102,7 +101,9 @@ const Navbar = () => {
           >
             {navLinks.map((link, index) => (
               <li key={index} className="relative group px-2 md:px-4">
-                <NavLink href={link.path} title={link.title} />
+                <Link href={link.path} passHref>
+                  <span>{link.title}</span>
+                </Link>
                 <span className="absolute bottom-0 left-0 block h-[2px] w-full bg-purple-500 scale-x-0 transform transition-all duration-300 group-hover:scale-x-100" />
               </li>
             ))}
@@ -125,11 +126,8 @@ const Navbar = () => {
           <ul className="text-center space-y-8 text-white text-lg z-50">
             {navLinks.map((link, index) => (
               <li key={index}>
-                <Link
-                  href={link.path}
-                  onClick={closeNavbar} // Close dropdown when link is clicked
-                >
-                  {link.title}
+                <Link href={link.path} onClick={closeNavbar}>
+                  <span>{link.title}</span>
                 </Link>
               </li>
             ))}

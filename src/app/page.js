@@ -46,8 +46,8 @@ export default function Home() {
           <AboutSection />
           <ProjectsSection />
           <Contact />
-        </div>
         <Footer />
+        </div>
       </main>
     </>
   );

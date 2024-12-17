@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <Navbar /> {/* Global Navbar */}
-        <main>{children}</main> {/* Render specific route content */}
+        <main>{children}</main> 
       </body>
     </html>
   );
