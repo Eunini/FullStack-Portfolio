@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import NavLink from "./NavLink";
+import NavLink from "./NavLink"; // Assuming this is a custom link component
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 
@@ -28,9 +28,12 @@ const Navbar = () => {
     setNavbarOpen((prev) => !prev);
   };
 
+  const closeNavbar = () => {
+    setNavbarOpen(false);
+  };
+
   useEffect(() => {
     const handleScroll = () => {
-      // Disable scroll effect if the navbar is open
       if (!navbarOpen && window.scrollY > 50) {
         setIsScrolled(true);
       } else {
@@ -42,7 +45,7 @@ const Navbar = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [navbarOpen]); // Add navbarOpen as a dependency to re-trigger the effect when the navbar is toggled
+  }, [navbarOpen]);
 
   return (
     <nav
@@ -70,21 +73,17 @@ const Navbar = () => {
           </Link>
         )}
 
-        {/* Hamburger Menu (Only visible before scroll) */}
-      {!navbarOpen && !isScrolled && (
-        <div className="mobile-menu block md:hidden">
-          <button
-            onClick={toggleNavbar}
-            className="flex items-center px-3 py-2 text-slate-200"
-          >
-            <Bars3Icon
-              className={`h-7 w-7 transform transition-all duration-300 ${
-                navbarOpen ? "rotate-180" : "rotate-0"
-              }`} // Add rotation effect here
-            />
-          </button>
-        </div>
-      )}
+        {/* Hamburger Menu */}
+        {!navbarOpen && !isScrolled && (
+          <div className="mobile-menu block md:hidden">
+            <button
+              onClick={toggleNavbar}
+              className="flex items-center px-3 py-2 text-slate-200"
+            >
+              <Bars3Icon className="h-7 w-7" />
+            </button>
+          </div>
+        )}
 
         {/* Desktop Menu */}
         <div
@@ -93,7 +92,6 @@ const Navbar = () => {
               ? "flex justify-center items-center w-full mx-auto font-base"
               : "menu hidden md:flex right-0"
           } md:w-full`}
-          id="navbar"
         >
           <ul
             className={`flex ${
@@ -113,29 +111,31 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu Overlay */}
-{navbarOpen && (
-  <div className="md:hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-90 z-50 flex flex-col items-center justify-center space-y-8">
-    {/* Close Button */}
-    <button
-      onClick={toggleNavbar}
-      className="absolute top-6 right-6 z-50 text-slate-200"
-    >
-      <XMarkIcon
-        className={`h-7 w-7 transform transition-all duration-300 ${
-          navbarOpen ? "rotate-180" : "rotate-0"
-        }`}
-      />
-    </button>
-    <ul className="text-center space-y-8 text-white text-lg z-50">
-      {navLinks.map((link, index) => (
-        <li key={index}>
-          <NavLink href={link.path} title={link.title} />
-        </li>
-      ))}
-    </ul>
-  </div>
-)}
+      {navbarOpen && (
+        <div className="md:hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-90 z-50 flex flex-col items-center justify-center space-y-8">
+          {/* Close Button */}
+          <button
+            onClick={toggleNavbar}
+            className="absolute top-6 right-6 z-50 text-slate-200"
+          >
+            <XMarkIcon className="h-7 w-7" />
+          </button>
 
+          {/* Links */}
+          <ul className="text-center space-y-8 text-white text-lg z-50">
+            {navLinks.map((link, index) => (
+              <li key={index}>
+                <Link
+                  href={link.path}
+                  onClick={closeNavbar} // Close dropdown when link is clicked
+                >
+                  {link.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </nav>
   );
 };
