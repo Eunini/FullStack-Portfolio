@@ -12,7 +12,7 @@ const projectsData = [
     image: "/images/projects/meinterest.png",
     tag: ["All", "Highlights"],
     gitUrl: "https://github.com/Eunini/meinterest",
-    previewUrl: "https://meininterest-06.vercel.app/",
+    previewUrl: "https://meinterest-06.vercel.app/",
   },
   {
     id: 2,

@@ -56,11 +56,8 @@ const Contact = () => {
           <Link href="https://github.com/Eunini" target="_blank">
             <SiGithub size={25} color="white" className="hover:text-purple-500" />
           </Link>
-          <Link href="https://www.linkedin.com/in/inioluwa-atanda-72a782270/" target="_blank">
+          <Link href="https://www.linkedin.com/in/inioluwa-atanda" target="_blank">
             <SiLinkedin size={25} color="white" className="hover:text-purple-500"/>
-          </Link>
-          <Link href="https://www.instagram.com/inioluwa-atanda-72a782270/">
-            <SiFacebook size={25} color="white" className="hover:text-purple-500"/>
           </Link>
           <Link href="https://wa.me/message/TFFG2ETW5L3CH1" target="_blank">
             <SiWhatsapp size={25} color="white" className="hover:text-purple-500"/>
