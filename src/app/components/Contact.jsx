@@ -39,58 +39,80 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="grid md:grid-cols-2 my-12 md:my-12 py-15 gap-4 relative p-3"
+      className="grid grid-cols-1 md:grid-cols-2 my-12 md:my-16 py-16 gap-8 md:gap-12 relative p-4 md:p-6"
     >
-      <div className="bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary-900 to-transparent rounded-full h-80 w-80 z-0 blur-lg absolute top-3/4 -left-4 transform -translate-x-1/2 -translate-1/2"></div>
+      <div className="bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900 via-blue-700 to-transparent dark:from-blue-800 dark:via-blue-600 dark:to-transparent rounded-full h-80 w-80 md:h-96 md:w-96 z-0 blur-lg absolute top-1/2 -left-8 transform -translate-x-1/2 -translate-y-1/2 opacity-30 dark:opacity-20"></div>
       <div className="z-10">
-        <h5 className="text-xl font-bold text-white my-2">
-          Let&apos;s Connect
-        </h5>
-        <p className="text-[#ADB7BE] mb-4 max-w-md">
-          {" "}
-          I&apos;m currently looking for new opportunities, my inbox is always
-          open. Whether you have a question or just want to say hi, I&apos;ll
-          get back to you!
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white dark:text-white mb-4 md:mb-6">
+          Let&apos;s Build Something Amazing
+        </h2>
+        <p className="text-gray-400 dark:text-gray-300 text-base md:text-lg lg:text-xl mb-6 md:mb-8 max-w-lg leading-relaxed">
+          Ready to bring your ideas to life? I&apos;m passionate about collaborating on projects 
+          that make a difference. Whether you&apos;re a startup with a vision or an established 
+          company looking to innovate, let&apos;s connect and create something extraordinary together.
         </p>
-        <div className="socials flex flex-row gap-2">
-          <Link href="https://github.com/Eunini" target="_blank">
-            <SiGithub size={25} color="white" className="hover:text-purple-500" />
+        <div className="mb-6 md:mb-8">
+          <h3 className="text-lg md:text-xl lg:text-2xl font-semibold text-white dark:text-white mb-3 md:mb-4">What I Can Help With:</h3>
+          <ul className="text-gray-400 dark:text-gray-300 space-y-2 text-sm md:text-base">
+            <li className="flex items-center">
+              <span className="w-2 h-2 bg-blue-400 dark:bg-blue-300 rounded-full mr-3"></span>
+              Full-stack web development
+            </li>
+            <li className="flex items-center">
+              <span className="w-2 h-2 bg-blue-400 dark:bg-blue-300 rounded-full mr-3"></span>
+              API development & integration
+            </li>
+            <li className="flex items-center">
+              <span className="w-2 h-2 bg-blue-400 dark:bg-blue-300 rounded-full mr-3"></span>
+              Cloud deployment & DevOps
+            </li>
+            <li className="flex items-center">
+              <span className="w-2 h-2 bg-blue-400 dark:bg-blue-300 rounded-full mr-3"></span>
+              Technical consulting
+            </li>
+          </ul>
+        </div>
+        <div className="socials flex flex-row gap-4 md:gap-6">
+          <Link href="https://github.com/Eunini" target="_blank" className="group">
+            <SiGithub size={28} className="md:text-3xl text-gray-400 dark:text-gray-300 group-hover:text-white dark:group-hover:text-white transition-colors duration-300" />
           </Link>
-          <Link href="https://www.linkedin.com/in/inioluwa-atanda" target="_blank">
-            <SiLinkedin size={25} color="white" className="hover:text-purple-500"/>
+          <Link href="https://www.linkedin.com/in/inioluwa-atanda" target="_blank" className="group">
+            <SiLinkedin size={28} className="md:text-3xl text-gray-400 dark:text-gray-300 group-hover:text-blue-400 dark:group-hover:text-blue-300 transition-colors duration-300"/>
           </Link>
-          <Link href="https://wa.me/message/TFFG2ETW5L3CH1" target="_blank">
-            <SiWhatsapp size={25} color="white" className="hover:text-purple-500"/>
+          <Link href="https://wa.me/message/TFFG2ETW5L3CH1" target="_blank" className="group">
+            <SiWhatsapp size={28} className="md:text-3xl text-gray-400 dark:text-gray-300 group-hover:text-green-400 dark:group-hover:text-green-300 transition-colors duration-300"/>
           </Link>
         </div>
       </div>
-      <div>
+      <div className="z-10">
         {emailSubmitted ? (
-          <p className="text-green-500 text-sm mt-2">
-            Email sent successfully!
-          </p>
+          <div className="bg-green-600 dark:bg-green-700 p-6 md:p-8 rounded-2xl text-center">
+            <h3 className="text-xl md:text-2xl font-bold text-white mb-4">Message Sent Successfully! 🎉</h3>
+            <p className="text-white text-sm md:text-base">Thank you for reaching out. I&apos;ll get back to you within 24 hours.</p>
+          </div>
         ) : (
-          <form className="flex flex-col" onSubmit={handleSubmit}>
-            <div className="mb-6">
+          <form className="flex flex-col space-y-4 md:space-y-6 bg-gray-900 dark:bg-gray-800 bg-opacity-50 dark:bg-opacity-70 p-6 md:p-8 rounded-2xl backdrop-blur-sm border border-gray-700 dark:border-gray-600" onSubmit={handleSubmit}>
+            <h3 className="text-xl md:text-2xl font-bold text-white dark:text-white mb-2 md:mb-4">Send me a message</h3>
+            <div>
               <label
                 htmlFor="email"
-                className="text-white block mb-2 text-sm font-medium"
+                className="text-white dark:text-gray-200 block mb-2 md:mb-3 text-sm font-medium"
               >
-                Your email
+                Your Email Address
               </label>
               <input
                 name="email"
                 type="email"
                 id="email"
                 required
-                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
-                placeholder="joan@google.com"
+                className="bg-gray-800 dark:bg-gray-700 border border-gray-600 dark:border-gray-500 placeholder-gray-400 dark:placeholder-gray-300 text-white dark:text-gray-100 text-sm rounded-xl block w-full p-3 md:p-4 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-all duration-300"
+                placeholder="your.email@example.com"
               />
             </div>
-            <div className="mb-6">
+            <div>
               <label
                 htmlFor="subject"
-                className="text-white block text-sm mb-2 font-medium"
+                className="text-white dark:text-gray-200 block text-sm mb-2 md:mb-3 font-medium"
               >
                 Subject
               </label>
@@ -99,27 +121,28 @@ const Contact = () => {
                 type="text"
                 id="subject"
                 required
-                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
-                placeholder="I love your designs!"
+                className="bg-gray-800 dark:bg-gray-700 border border-gray-600 dark:border-gray-500 placeholder-gray-400 dark:placeholder-gray-300 text-white dark:text-gray-100 text-sm rounded-xl block w-full p-3 md:p-4 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-all duration-300"
+                placeholder="What's this about?"
               />
             </div>
-            <div className="mb-6">
+            <div>
               <label
                 htmlFor="message"
-                className="text-white block text-sm mb-2 font-medium"
+                className="text-white dark:text-gray-200 block text-sm mb-2 md:mb-3 font-medium"
               >
-                Message
+                Your Message
               </label>
               <textarea
                 name="message"
                 id="message"
-                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
-                placeholder="Let's talk about..."
+                rows="4"
+                className="bg-gray-800 dark:bg-gray-700 border border-gray-600 dark:border-gray-500 placeholder-gray-400 dark:placeholder-gray-300 text-white dark:text-gray-100 text-sm rounded-xl block w-full p-3 md:p-4 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-all duration-300 resize-none"
+                placeholder="Tell me about your project or just say hello!"
               />
             </div>
             <button
               type="submit"
-              className="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2.5 px-5 rounded-lg w-full"
+              className="bg-blue-600 dark:bg-blue-700 hover:bg-blue-700 dark:hover:bg-blue-600 text-white font-medium py-3 md:py-4 px-6 md:px-8 rounded-xl w-full transition-colors duration-300 text-sm md:text-base"
             >
               Send Message
             </button>

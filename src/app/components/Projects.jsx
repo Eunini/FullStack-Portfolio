@@ -1,78 +1,42 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import ProjectCard from "../components/ProjectCard";
-import ProjectTag from "../components/ProjectTag";
 import { motion, useInView } from "framer-motion";
 
 const projectsData = [
   {
     id: 1,
-    title: "Meinterest",
-    description: "A Pinterest-like website",
-    image: "/images/projects/meinterest.png",
-    tag: ["All", "Highlights"],
-    gitUrl: "https://github.com/Eunini/meinterest",
-    previewUrl: "https://meinterest-06.vercel.app/",
+    title: "Ubuy",
+    description: "A modern e-commerce website specializing in mobile phones. Features intuitive product browsing, detailed specifications, and secure checkout process for seamless online shopping experience.",
+    image: "/images/projects/ubuy.png",
+    previewUrl: "https://github.com/Eunini",
   },
   {
     id: 2,
-    title: "uishop",
-    description: "An e-commerce shopping webiste(front-end only)",
-    image: "/images/projects/16.png",
-    tag: ["All", "Highlights"],
-    gitUrl: "https://github.com/Eunini/uishop",
-    previewUrl: "https://uishop-rho.vercel.app",
+    title: "Erande",
+    description: "A comprehensive vendor dashboard platform that empowers sellers to showcase their products, manage inventory, track orders, and streamline their business operations with real-time analytics.",
+    image: "/images/projects/erande.png",
+    previewUrl: "https://github.com/Eunini",
   },
   {
     id: 3,
-    title: "Nofomoe Landingpage",
-    description: "A crytocurrency website landing page",
-    image: "/images/projects/17.png",
-    tag: ["All"],
-    gitUrl: "https://github.com/Eunini/nofomoe-landingpage",
-    previewUrl: "https://nofomoe-landingpage.vercel.app/",
-  },
-  {
-    id: 4,
     title: "Ngwater",
-    description: "A website for Nigerian Geologists, where can log and track",
-    image: "/images/projects/ngwater port.png",
-    tag: ["All", "Highlights"],
-    gitUrl: "https://github.com/yemipidanhub/ngw-water",
+    description: "An advanced water logging system designed for geologists to record, track, and analyze water data. Provides comprehensive tools for geological surveys and water resource management.",
+    image: "/images/projects/ngwater.png",
     previewUrl: "https://ngwater.app/",
   },
   {
-    id: 5,
-    title: "EasyBanking",
-    description: "A sleek UI bank landing page template",
-    image: "/images/projects/5.png",
-    tag: ["All", "Highlights"],
-    gitUrl: "https://github.com/Eunini/EasyBanking",
-    previewUrl: "https://easy-banking-zqc6.onrender.com",
-  },
-  {
-    id: 6,
-    title: "FantasyDevs",
-    description: "A Nextjs Landing Page Template",
-    image: "/images/IMG-20241121-WA0022.jpg",
-    tag: ["All"],
-    gitUrl: "https://github.com/Eunini/FantasyDevs",
-    previewUrl: "https://fantasy-devs-8nic.vercel.app/",
+    id: 4,
+    title: "Repropack",
+    description: "An innovative Python project packaging solution that simplifies deployment across different machines. Enables one-click setup and seamless project migration with automated dependency management.",
+    image: "/images/projects/repropack.png",
+    previewUrl: "https://github.com/Eunini",
   },
  ];
  
 const ProjectsSection = () => {
-  const [tag, setTag] = useState("All");
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
-
-  const handleTagChange = (newTag) => {
-    setTag(newTag);
-  };
-
-  const filteredProjects = projectsData.filter((project) =>
-    project.tag.includes(tag)
-  );
 
   const cardVariants = {
     initial: { y: 50, opacity: 0 },
@@ -80,37 +44,42 @@ const ProjectsSection = () => {
   };
 
   return (
-    <section id="projects">
-      <h2 className="text-center text-4xl font-bold text-white mt-4 mb-8 md:mb-12">
-        My Projects
-      </h2>
-      <div className="text-white flex flex-row justify-center items-center gap-2 py-6">
-        <ProjectTag
-          onClick={handleTagChange}
-          name="All"
-          isSelected={tag === "All"}
-        />
-        <ProjectTag
-          onClick={handleTagChange}
-          name="Highlights"
-          isSelected={tag === "Highlights"}
-        />
+    <section id="projects" className="py-12 sm:py-16">
+      <div className="text-center mb-12 sm:mb-16">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">
+          Featured Projects
+        </h2>
+        <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed mb-6 sm:mb-8 px-4">
+          Here are some of my recent projects that showcase my skills in full-stack development, 
+          innovative problem-solving, and creating user-centered digital experiences.
+        </p>
+        
+        {/* View All Projects Button */}
+        <div className="mb-6 sm:mb-8">
+          <a
+            href="https://github.com/Eunini"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg transition-all duration-300 font-medium text-sm sm:text-base lg:text-lg"
+          >
+            View All Projects on GitHub
+          </a>
+        </div>
       </div>
-      <ul ref={ref} className="grid md:grid-cols-3 gap-8 md:gap-12">
-        {filteredProjects.map((project, index) => (
+      <ul ref={ref} className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 max-w-7xl mx-auto px-4 sm:px-6">
+        {projectsData.map((project, index) => (
           <motion.li
             key={index}
             variants={cardVariants}
             initial="initial"
             animate={isInView ? "animate" : "initial"}
-            transition={{ duration: 0.3, delay: index * 0.4 }}
+            transition={{ duration: 0.6, delay: index * 0.2 }}
           >
             <ProjectCard
               key={project.id}
               title={project.title}
               description={project.description}
               imgUrl={project.image}
-              gitUrl={project.gitUrl}
               previewUrl={project.previewUrl}
             />
           </motion.li>
