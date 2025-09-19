@@ -1,11 +1,74 @@
 "use client";
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
 const HeroSection = () => {
+  const [isDownloading, setIsDownloading] = useState(false);
+  
+  const handleDownloadCV = async (e) => {
+    e.preventDefault();
+    setIsDownloading(true);
+    
+    try {
+      // Try API route first for forced download
+      const response = await fetch('/api/download-cv');
+      
+      if (response.ok) {
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'Inioluwa_Atanda_CV.pdf';
+        link.style.display = 'none';
+        
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        window.URL.revokeObjectURL(url);
+      } else {
+        throw new Error('API route failed');
+      }
+    } catch (error) {
+      console.error('Error downloading CV via API, trying direct download:', error);
+      
+      // Fallback: Try direct blob download
+      try {
+        const response = await fetch('/CV.pdf');
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'Inioluwa_Atanda_CV.pdf';
+        link.style.display = 'none';
+        
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        window.URL.revokeObjectURL(url);
+      } catch (fallbackError) {
+        console.error('Fallback download failed, using simple link:', fallbackError);
+        
+        // Final fallback: Simple link with download attribute
+        const link = document.createElement('a');
+        link.href = '/CV.pdf';
+        link.download = 'Inioluwa_Atanda_CV.pdf';
+        link.target = '_blank';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    } finally {
+      setIsDownloading(false);
+    }
+  };
+
   return (
     <section className="lg:py-16" aria-label="Hero section" role="banner">
       <div className="grid grid-cols-1 sm:grid-cols-12">
@@ -59,14 +122,29 @@ const HeroSection = () => {
             >
               Let&apos;s Work Together
             </Link>
-            <Link
-              href="/CV.pdf"
-              download="Inioluwa_Atanda_CV.pdf"
-              className="px-6 sm:px-8 inline-block py-3 sm:py-4 w-full sm:w-fit rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium text-base sm:text-lg transition-all duration-300 text-center"
+            <button
+              onClick={handleDownloadCV}
+              disabled={isDownloading}
+              className="px-6 sm:px-8 inline-block py-3 sm:py-4 w-full sm:w-fit rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium text-base sm:text-lg transition-all duration-300 text-center cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               aria-label="Download Inioluwa Atanda's resume PDF"
             >
-              Download Resume
-            </Link>
+              {isDownloading ? (
+                <>
+                  <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Downloading...
+                </>
+              ) : (
+                <>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  Download Resume
+                </>
+              )}
+            </button>
           </div>
         </motion.div>
         <motion.div

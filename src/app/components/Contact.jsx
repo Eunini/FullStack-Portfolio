@@ -2,37 +2,58 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import {SiFacebook, SiWhatsapp, SiLinkedin, SiGithub} from 'react-icons/si';
+
 const Contact = () => {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setError("");
+
     const data = {
       email: e.target.email.value,
       subject: e.target.subject.value,
       message: e.target.message.value,
     };
+
+    // Basic validation
+    if (!data.email || !data.subject || !data.message) {
+      setError("Please fill in all fields.");
+      setIsSubmitting(false);
+      return;
+    }
+
     const JSONdata = JSON.stringify(data);
     const endpoint = "/api/send";
 
-    // Form the request for sending data to the server.
-    const options = {
-      // The method is POST because we are sending data.
-      method: "POST",
-      // Tell the server we're sending JSON.
-      headers: {
-        "Content-Type": "application/json",
-      },
-      // Body of the request is the JSON data we created above.
-      body: JSONdata,
-    };
+    try {
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSONdata,
+      };
 
-    const response = await fetch(endpoint, options);
-    const resData = await response.json();
+      const response = await fetch(endpoint, options);
+      const resData = await response.json();
 
-    if (response.status === 200) {
-      console.log("Message sent.");
-      setEmailSubmitted(true);
+      if (response.status === 200) {
+        console.log("Message sent successfully.");
+        setEmailSubmitted(true);
+        // Reset form
+        e.target.reset();
+      } else {
+        setError(resData.error || "Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
+      setError("Network error. Please check your connection and try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -73,14 +94,20 @@ const Contact = () => {
           </ul>
         </div>
         <div className="socials flex flex-row gap-4 md:gap-6">
-          <Link href="https://github.com/Eunini" target="_blank" className="group">
+          <Link href="https://github.com/Eunini" target="_blank" className="group" aria-label="Visit GitHub profile">
             <SiGithub size={28} className="md:text-3xl text-gray-600 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-300" />
           </Link>
-          <Link href="https://www.linkedin.com/in/inioluwa-atanda" target="_blank" className="group">
+          <Link href="https://www.linkedin.com/in/inioluwa-atanda" target="_blank" className="group" aria-label="Visit LinkedIn profile">
             <SiLinkedin size={28} className="md:text-3xl text-gray-600 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors duration-300"/>
           </Link>
-          <Link href="https://wa.me/message/TFFG2ETW5L3CH1" target="_blank" className="group">
+          <Link href="https://wa.me/message/TFFG2ETW5L3CH1" target="_blank" className="group" aria-label="Send WhatsApp message">
             <SiWhatsapp size={28} className="md:text-3xl text-gray-600 dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-green-300 transition-colors duration-300"/>
+          </Link>
+          <Link href="mailto:inioluwaatanda@example.com" className="group" aria-label="Send email directly">
+            <svg className="w-7 h-7 md:w-8 md:h-8 text-gray-600 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+            </svg>
           </Link>
         </div>
       </div>
@@ -88,24 +115,38 @@ const Contact = () => {
         {emailSubmitted ? (
           <div className="bg-green-600 dark:bg-green-700 p-6 md:p-8 rounded-2xl text-center">
             <h3 className="text-xl md:text-2xl font-bold text-white mb-4">Message Sent Successfully! 🎉</h3>
-            <p className="text-white text-sm md:text-base">Thank you for reaching out. I&apos;ll get back to you within 24 hours.</p>
+            <p className="text-white text-sm md:text-base mb-4">Thank you for reaching out. I&apos;ll get back to you within 24 hours.</p>
+            <button 
+              onClick={() => setEmailSubmitted(false)}
+              className="bg-white bg-opacity-20 hover:bg-opacity-30 text-white font-medium py-2 px-4 rounded-lg transition-all duration-300"
+            >
+              Send Another Message
+            </button>
           </div>
         ) : (
           <form className="flex flex-col space-y-4 md:space-y-6 bg-gray-50 dark:bg-gray-800 bg-opacity-80 dark:bg-opacity-70 p-6 md:p-8 rounded-2xl backdrop-blur-sm shadow-lg" onSubmit={handleSubmit}>
             <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-2 md:mb-4">Send me a message</h3>
+            
+            {error && (
+              <div className="bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-200 px-4 py-3 rounded-lg mb-4">
+                <p className="text-sm">{error}</p>
+              </div>
+            )}
+
             <div>
               <label
                 htmlFor="email"
                 className="text-gray-800 dark:text-gray-200 block mb-2 md:mb-3 text-sm font-medium"
               >
-                Your Email Address
+                Your Email Address *
               </label>
               <input
                 name="email"
                 type="email"
                 id="email"
                 required
-                className="bg-white dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-300 text-gray-900 dark:text-gray-100 text-sm rounded-xl block w-full p-3 md:p-4 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-all duration-300 outline-none border-none shadow-sm"
+                disabled={isSubmitting}
+                className="bg-white dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-300 text-gray-900 dark:text-gray-100 text-sm rounded-xl block w-full p-3 md:p-4 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-all duration-300 outline-none border-none shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
                 placeholder="your.email@example.com"
               />
             </div>
@@ -114,14 +155,15 @@ const Contact = () => {
                 htmlFor="subject"
                 className="text-gray-800 dark:text-gray-200 block text-sm mb-2 md:mb-3 font-medium"
               >
-                Subject
+                Subject *
               </label>
               <input
                 name="subject"
                 type="text"
                 id="subject"
                 required
-                className="bg-white dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-300 text-gray-900 dark:text-gray-100 text-sm rounded-xl block w-full p-3 md:p-4 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-all duration-300 outline-none border-none shadow-sm"
+                disabled={isSubmitting}
+                className="bg-white dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-300 text-gray-900 dark:text-gray-100 text-sm rounded-xl block w-full p-3 md:p-4 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-all duration-300 outline-none border-none shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
                 placeholder="What's this about?"
               />
             </div>
@@ -130,21 +172,34 @@ const Contact = () => {
                 htmlFor="message"
                 className="text-gray-800 dark:text-gray-200 block text-sm mb-2 md:mb-3 font-medium"
               >
-                Your Message
+                Your Message *
               </label>
               <textarea
                 name="message"
                 id="message"
                 rows="4"
-                className="bg-white dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-300 text-gray-900 dark:text-gray-100 text-sm rounded-xl block w-full p-3 md:p-4 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-all duration-300 resize-none outline-none border-none shadow-sm"
+                required
+                disabled={isSubmitting}
+                className="bg-white dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-300 text-gray-900 dark:text-gray-100 text-sm rounded-xl block w-full p-3 md:p-4 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-all duration-300 resize-none outline-none border-none shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
                 placeholder="Tell me about your project or just say hello!"
               />
             </div>
             <button
               type="submit"
-              className="bg-blue-600 dark:bg-blue-700 hover:bg-blue-700 dark:hover:bg-blue-600 text-white font-medium py-3 md:py-4 px-6 md:px-8 rounded-xl w-full transition-colors duration-300 text-sm md:text-base shadow-lg hover:shadow-xl outline-none border-none"
+              disabled={isSubmitting}
+              className="bg-blue-600 dark:bg-blue-700 hover:bg-blue-700 dark:hover:bg-blue-600 text-white font-medium py-3 md:py-4 px-6 md:px-8 rounded-xl w-full transition-colors duration-300 text-sm md:text-base shadow-lg hover:shadow-xl outline-none border-none disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
             >
-              Send Message
+              {isSubmitting ? (
+                <>
+                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Sending...
+                </>
+              ) : (
+                "Send Message"
+              )}
             </button>
           </form>
         )}
