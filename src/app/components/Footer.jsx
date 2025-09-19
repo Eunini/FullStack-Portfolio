@@ -25,13 +25,6 @@ const Footer = () => {
           <p className="text-center">
             © 2024 Inioluwa Atanda. All rights reserved.
           </p>
-          <div className="hidden sm:block w-1 h-1 bg-gray-400 rounded-full"></div>
-          <div className="flex items-center space-x-2">
-            <span>Built with</span>
-            <span className="text-blue-400 dark:text-blue-300">Next.js</span>
-            <span>&</span>
-            <span className="text-blue-400 dark:text-blue-300">Tailwind CSS</span>
-          </div>
         </div>
       </div>
     </footer>

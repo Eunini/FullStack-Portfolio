@@ -9,14 +9,14 @@ const projectsData = [
     title: "Ubuy",
     description: "A modern e-commerce website specializing in mobile phones. Features intuitive product browsing, detailed specifications, and secure checkout process for seamless online shopping experience.",
     image: "/images/projects/ubuy.png",
-    previewUrl: "https://github.com/Eunini",
+    previewUrl: "https://u-buy-six.vercel.app/",
   },
   {
     id: 2,
     title: "Erande",
     description: "A comprehensive vendor dashboard platform that empowers sellers to showcase their products, manage inventory, track orders, and streamline their business operations with real-time analytics.",
     image: "/images/projects/erande.png",
-    previewUrl: "https://github.com/Eunini",
+    previewUrl: "https://test-vendor.useerande.com/",
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ const projectsData = [
     title: "Repropack",
     description: "An innovative Python project packaging solution that simplifies deployment across different machines. Enables one-click setup and seamless project migration with automated dependency management.",
     image: "/images/projects/repropack.png",
-    previewUrl: "https://github.com/Eunini",
+    previewUrl: "https://repro-pack-frontend.vercel.app/",
   },
  ];
  

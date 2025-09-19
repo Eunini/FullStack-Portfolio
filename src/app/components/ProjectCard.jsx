@@ -10,13 +10,12 @@ const ProjectCard = ({ imgUrl, title, description, previewUrl }) => {
           className="h-48 sm:h-56 md:h-64 lg:h-72 relative group/image"
           style={{ background: `url(${imgUrl})`, backgroundSize: "cover", backgroundPosition: "center" }}
         >
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-60"></div>
-          <div className="overlay items-center justify-center absolute inset-0 bg-gray-900 dark:bg-black bg-opacity-0 group-hover/image:bg-opacity-80 transition-all duration-300 flex">
+          <div className="overlay items-center justify-center absolute inset-0 bg-gray-900 dark:bg-black opacity-0 group-hover/image:opacity-60 transition-all duration-300 hidden group-hover/image:flex">
             <Link
               href={previewUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="opacity-0 group-hover/image:opacity-100 transform scale-75 group-hover/image:scale-100 transition-all duration-300"
+              className="transform scale-75 group-hover/image:scale-100 transition-all duration-300"
             >
               <div className="bg-blue-600 hover:bg-blue-700 p-3 sm:p-4 rounded-full transition-colors duration-300">
                 <EyeIcon className="h-6 w-6 sm:h-8 sm:w-8 text-white" />

@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const HeroSection = () => {
   return (
-    <section className="lg:py-16">
+    <section className="lg:py-16" aria-label="Hero section" role="banner">
       <div className="grid grid-cols-1 sm:grid-cols-12">
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
@@ -17,13 +17,16 @@ const HeroSection = () => {
         >
           <h1 className="text-gray-900 dark:text-white mb-4 sm:mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight font-extrabold">
             <span className="text-gray-900 dark:text-white">
-              Hi, I&apos;m Inioluwa
+              Hi, I&apos;m{" "}
+              <span itemProp="name" className="text-blue-600 dark:text-blue-400">
+                Inioluwa Atanda
+              </span>
             </span>
             <br></br>
             <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-gray-600 dark:text-gray-400 font-medium">
               I&apos;m a{" "}
             </span>
-            <Suspense fallback={<div>Loading animation...</div>}>
+            <Suspense fallback={<span className="text-blue-600 dark:text-blue-400">Full-Stack Developer</span>}>
               <TypeAnimation
                 sequence={[
                   "Full-Stack Developer",
@@ -42,15 +45,17 @@ const HeroSection = () => {
               />
             </Suspense>
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 text-base sm:text-lg md:text-xl lg:text-xl leading-relaxed max-w-2xl mb-6 sm:mb-8">
+          <p className="text-gray-600 dark:text-gray-400 text-base sm:text-lg md:text-xl lg:text-xl leading-relaxed max-w-2xl mb-6 sm:mb-8" itemProp="description">
             Crafting digital experiences that matter. I transform complex problems into elegant solutions, 
-            building scalable applications that bridge the gap between innovative technology and real-world impact. 
+            building scalable web applications with <strong>React, Next.js, Node.js, Python, and Django</strong>. 
+            Specialized in full-stack development, cloud computing, and DevOps practices.
             <span className="text-blue-600 dark:text-blue-400 font-medium"> Let&apos;s create something extraordinary together.</span>
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4" role="group" aria-label="Call to action buttons">
             <Link
               href="#contact"
               className="px-6 sm:px-8 inline-block py-3 sm:py-4 w-full sm:w-fit rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium text-base sm:text-lg transition-colors duration-300 text-center"
+              aria-label="Navigate to contact section to work together"
             >
               Let&apos;s Work Together
             </Link>
@@ -58,6 +63,7 @@ const HeroSection = () => {
               href="/CV.pdf"
               download="Inioluwa_Atanda_CV.pdf"
               className="px-6 sm:px-8 inline-block py-3 sm:py-4 w-full sm:w-fit rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium text-base sm:text-lg transition-all duration-300 text-center"
+              aria-label="Download Inioluwa Atanda's resume PDF"
             >
               Download Resume
             </Link>
@@ -72,10 +78,15 @@ const HeroSection = () => {
           <div className="rounded-full bg-gray-200 dark:bg-gray-800 w-[250px] h-[250px] sm:w-[300px] sm:h-[300px] lg:w-[400px] lg:h-[400px] relative shadow-lg dark:shadow-xl">
             <Image
               src="/images/hero-image.png"
-              alt="Inioluwa Atanda - Full Stack Developer"
+              alt="Inioluwa Atanda - Professional Full-Stack Developer and Software Engineer specializing in React, Next.js, Node.js, Python, and Django"
               className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-full"
               width={320}
               height={320}
+              priority
+              sizes="(max-width: 640px) 250px, (max-width: 1024px) 300px, 400px"
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyLli2G4+E1FvFeHLG3ImkN0g9s0xhyW7a2VWa5Df7KTMSE0EcyQTM1eXyULQC7FZ4xmvFipCOnFgC0MG0lOdQdgz5LyuMLJZOGaS3jKeJUVa1KlWgGipmj/9k="
+              itemProp="image"
             />
           </div>
         </motion.div>
